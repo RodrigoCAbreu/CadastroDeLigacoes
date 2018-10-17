@@ -1,0 +1,13 @@
+Script Banco de Dados
+
+CREATE DATABASE RegistroDeLigacoes;
+
+USE RegistroDeLigacoes;
+
+Create table usuarios (
+ID Int UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT,
+nome varchar(50),
+login Varchar(30),
+senha Varchar(40),
+Primary Key (ID)) ENGINE = MyISAM;
+
