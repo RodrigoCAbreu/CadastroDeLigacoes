@@ -31,6 +31,7 @@ public class Cadastro implements Serializable {
 	private String contato4;
 	private String situacao4;
 	private String obser;
+	
 	public long getId() {
 		return id;
 	}
