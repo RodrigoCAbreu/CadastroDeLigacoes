@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page import="entidade.Cadastro" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Registro de Ligações</title>
+	<title>Registro de Ligação</title>
 	<link rel="stylesheet" href="./css/bootstrap.css" />
 	<script src="./js/bootstrap.min.js"></script>
 </head>
@@ -13,12 +14,20 @@
 	<section>
 		<h1>IPGG - Registro de ligações</h1>
 	</section>
+	
+	<%  String msg = (String)session.getAttribute("MENSAGEM");
+	   
+	   if (msg != null) {
+		   session.setAttribute("MENSAGEM", null);
+	%>
+			<h3 class="alert alert-danger"><%=msg%></h3>
+	<% } %>
 		
 
-	<form method="post" class="form-inline">
+	<form action="./CadastroController" method="post" class="form-inline">
 	  
 		<label for="textfield" class="margemR">Usuário:</label>
-		<input type="text" class="margemB" name="usuario" id="usuario" readonly>
+		<input type="text" class="margemB" name="usuario" id="usuario">
         
         <label for="textfield" class="margemR">Data:</label>
 		<input type="date" class="margemB" name="data" id="data">
@@ -57,7 +66,7 @@
             <option></option>
         </select>
         
-        <select class="selectMenu" name="nomeProfissional" id="nomeProfissional">
+        <select class="selectMenu" name="profissional" id="profissional">
   			<option selected>Selecione o nome do profissional</option>
             <option>Dr. Drauzio varella</option>
             <option></option>
@@ -65,7 +74,7 @@
         
         <br>
         
-        <select class="selectMenu" name="motivoLigacao" id="motivoLigacao">
+        <select class="selectMenu" name="motivo" id="motivo">
   			<option selected>Selecione o motivo da ligação</option>
             <option>Alteração data da consulta</option>
             <option></option>
@@ -74,10 +83,10 @@
         <br>
         
         <label for="tel" class="margemR">Telefone:</label>
-  		<input type="tel" class="margemB" name="tel1" id="tel1">
+  		<input type="tel" class="margemB" name="telefone1" id="telefone1">
         
         <label for="textfield" class="margemR">Contato:</label>
-		<input type="text" class="margemB" name="txtcontato1" id="txtcontato1">
+		<input type="text" class="margemB" name="contato1" id="contato1">
         
         <select class="margemR" name="situacao1" id="situacao1">
         	<option selected>Situação</option>
@@ -88,7 +97,7 @@
         <br>
         
         <label for="tel" class="margemR">Telefone:</label>
-  		<input type="tel" class="margemB" name="tel2" id="tel2">
+  		<input type="tel" class="margemB" name="telefone2" id="telefone2">
         
         <label for="textfield" class="margemR">Contato:</label>
 		<input type="text" class="margemB" name="contato2" id="contato2">
@@ -102,7 +111,7 @@
         <br>
         
         <label for="tel" class="margemR">Telefone:</label>
-  		<input type="tel" class="margemB" name="tel3" id="tel3">
+  		<input type="tel" class="margemB" name="telefone3" id="telefone3">
         
         <label for="textfield" class="margemR">Contato:</label>
 		<input type="text" class="margemB" name="contato3" id="contato3">
@@ -116,7 +125,7 @@
         <br>
         
         <label for="tel" class="margemR">Telefone:</label>
-  		<input type="tel" class="margemB" name="tel4" id="tel4">
+  		<input type="tel" class="margemB" name="telefone4" id="telefone4">
         
         <label for="textfield" class="margemR">Contato:</label>
 		<input type="text" class="margemB" name="contato4" id="contato4">
@@ -134,7 +143,7 @@
         
         <br><br>
         
-        <input class="btn btn-primary" type="submit" value="Adicionar" name="cmd" id="btnEnviar">     <input class="btn btn-primary" type="reset" value="Pesquisar" name="cmd" id="btnPesquisar"> 
+        <button class="btn btn-primary" type="submit" value="adicionar" name="cmd">Adicionar</button>     <button class="btn btn-primary" type="submit" value="pesquisar" name="cmd">Pesquisar</button> 
         
     </form>
 

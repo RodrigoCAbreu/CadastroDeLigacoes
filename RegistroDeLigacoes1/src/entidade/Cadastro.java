@@ -1,7 +1,7 @@
 package entidade;
 
 import java.io.Serializable;
-import java.util.Date;
+
 
 public class Cadastro implements Serializable {
 
@@ -9,7 +9,7 @@ public class Cadastro implements Serializable {
 
 	private long id;
 	private String usuario;
-	private Date data = new Date();
+	private String data;
 	private String hora;
 	private String setor;
 	private String codigo;
@@ -44,10 +44,10 @@ public class Cadastro implements Serializable {
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
-	public Date getData() {
+	public String getData() {
 		return data;
 	}
-	public void setData(Date data) {
+	public void setData(String data) {
 		this.data = data;
 	}
 	public String getHora() {
@@ -176,6 +176,7 @@ public class Cadastro implements Serializable {
 	public void setObser(String obser) {
 		this.obser = obser;
 	}
+	
 	
 	
 	

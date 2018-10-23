@@ -1,7 +1,6 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -35,7 +34,7 @@ public class CadastroDAOImpl implements CadastroDAO {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setLong(1, 0);
 			pstmt.setString(2, c.getUsuario());
-			pstmt.setDate(3, (Date) c.getData());
+			pstmt.setString(3, c.getData());
 			pstmt.setString(4, c.getHora());
 			pstmt.setString(5, c.getSetor());
 			pstmt.setString(6, c.getCodigo());

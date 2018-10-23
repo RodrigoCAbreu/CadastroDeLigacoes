@@ -2,7 +2,7 @@ package dao;
 
 public class GenericDAOException extends Exception {
 
-	private static final long serialVersionUID = -4159976428211779792L;
+	private static final long serialVersionUID = 5210431331179859349L;
 
 	public GenericDAOException() {
 	}
