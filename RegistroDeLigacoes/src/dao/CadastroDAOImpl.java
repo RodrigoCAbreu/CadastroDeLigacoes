@@ -3,7 +3,10 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import entidade.Cadastro;
 
@@ -56,9 +59,52 @@ public class CadastroDAOImpl implements CadastroDAO {
 			pstmt.setString(22, c.getContato4());
 			pstmt.setString(23, c.getSituacao4());
 			pstmt.setString(24, c.getObser());
+			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new GenericDAOException(e);
 		}
+	}
+
+	@Override
+	public List<Cadastro> pesquisarPorCodigo(String codigo) throws GenericDAOException {
+		List<Cadastro> lista = new ArrayList<>();
+		String sql = "SELECT * FROM cadastro WHERE codigo like ?";
+		try {
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%" + codigo + "%");
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Cadastro c = new Cadastro();
+				c.setId(rs.getLong("id"));
+				c.setData(rs.getString("data"));
+				c.setHora(rs.getString("hora"));
+				c.setSetor(rs.getString("setor"));
+				c.setCodigo(rs.getString("codigo"));
+				c.setProntuario(rs.getString("prontuario"));
+				c.setPaciente(rs.getString("paciente"));
+				c.setConsulta(rs.getString("consulta"));
+				c.setProfissional(rs.getString("profissional"));
+				c.setMotivo(rs.getString("motivo"));
+				c.setTelefone1(rs.getString("telefone1"));
+				c.setContato1(rs.getString("contato1"));
+				c.setSituacao1(rs.getString("situacao1"));
+				c.setTelefone2(rs.getString("telefone2"));
+				c.setContato2(rs.getString("contato2"));
+				c.setSituacao2(rs.getString("situacao2"));
+				c.setTelefone3(rs.getString("telefone3"));
+				c.setContato3(rs.getString("contato3"));
+				c.setSituacao3(rs.getString("situacao3"));
+				c.setTelefone4(rs.getString("telefone4"));
+				c.setContato4(rs.getString("contato4"));
+				c.setSituacao4(rs.getString("situacao4"));
+				c.setObser(rs.getString("obser"));
+				lista.add(c);			
+			}
+		} catch (SQLException e) {
+			throw new GenericDAOException( e );
+		}
+		
+		return lista;
 	}
 
 }

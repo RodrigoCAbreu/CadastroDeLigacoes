@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -57,9 +58,13 @@ public class CadastroController extends HttpServlet {
 				c.setTelefone4(request.getParameter("telefone4"));
 				c.setContato4(request.getParameter("contato4"));
 				c.setSituacao4(request.getParameter("situacao4"));
-				c.setObser(request.getParameter("observacoes"));
+				c.setObser(request.getParameter("obser"));
 				cDao.adicionar(c);
 				msg = "Cadastro adicionado com sucesso";
+			} else if ("pesquisar".equals(cmd)) {
+				List<Cadastro> lista = cDao.pesquisarPorCodigo(request.getParameter("codigo"));
+				session.setAttribute("LISTA", lista);
+				msg = "Foi encontrado " + lista.size() + " cadastro";
 			}
 		} catch (GenericDAOException e) {
 			e.printStackTrace();

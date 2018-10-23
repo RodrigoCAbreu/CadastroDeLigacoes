@@ -176,9 +176,58 @@ public class Cadastro implements Serializable {
 	public void setObser(String obser) {
 		this.obser = obser;
 	}
-	
-	
-	
-	
-	
+
+	@Override
+	public String toString() {
+		StringBuffer s = new StringBuffer();
+		s.append("ID:");
+		s.append(this.getId());
+		s.append("\tUsuario:");
+		s.append(this.getUsuario());
+		s.append("\tData:");
+		s.append(this.getData());
+		s.append("\tHora:");
+		s.append(this.getHora());
+		s.append("\tSetor:");
+		s.append(this.getSetor());
+		s.append("\tCodigo:");
+		s.append(this.getCodigo());
+		s.append("\tProntuario:");
+		s.append(this.getProntuario());
+		s.append("\tPaciente:");
+		s.append(this.getPaciente());
+		s.append("\tConsulta:");
+		s.append(this.getConsulta());
+		s.append("\tProfissional:");
+		s.append(this.getProfissional());
+		s.append("\tMotivo:");
+		s.append(this.getMotivo());
+		s.append("\tTelefone:");
+		s.append(this.getTelefone1());
+		s.append("\tContato:");
+		s.append(this.getContato1());
+		s.append("\tSituação:");
+		s.append(this.getSituacao1());
+		s.append("\tTelefone:");
+		s.append(this.getTelefone2());
+		s.append("\tContato:");
+		s.append(this.getContato2());
+		s.append("\tSituação:");
+		s.append(this.getSituacao2());
+		s.append("\tTelefone:");
+		s.append(this.getTelefone3());
+		s.append("\tContato:");
+		s.append(this.getContato3());
+		s.append("\tSituação:");
+		s.append(this.getSituacao3());
+		s.append("\tTelefone:");
+		s.append(this.getTelefone4());
+		s.append("\tContato:");
+		s.append(this.getContato4());
+		s.append("\tSituação:");
+		s.append(this.getSituacao4());
+		s.append("\tObservação:");
+		s.append(this.getObser());
+		return s.toString();
+	}
 }

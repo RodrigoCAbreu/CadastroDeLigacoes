@@ -54,11 +54,11 @@ label {
 	display:inline-block;	
 }
 
-#consulta, #nomeProfissional, #motivoLigacao {
+#consulta, #profissional, #motivo {
 	margin-left: 10em;
 }
 
-#observacoes {
+#obser {
 	width:73%;
 	height:8em;	
 }

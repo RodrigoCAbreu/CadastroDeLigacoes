@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="entidade.Cadastro" %>
+<%@ page import="entidade.Cadastro, java.util.List, java.util.ArrayList" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,6 +16,12 @@
 	</section>
 	
 	<%  String msg = (String)session.getAttribute("MENSAGEM");
+	   List<Cadastro> lista = (List<Cadastro>)session.getAttribute("LISTA");
+	   if (lista == null){
+		   lista = new ArrayList<Cadastro>();
+	   } else {
+		   session.setAttribute("LISTA", null);
+	   }
 	   
 	   if (msg != null) {
 		   session.setAttribute("MENSAGEM", null);
@@ -139,13 +145,44 @@
         <br>
         
         <label for="textfield" class="margemR">Observações:</label>
-		<input type="text" name="observacoes" id="observacoes">
+		<input type="text" name="obser" id="obser">
         
         <br><br>
         
-        <button class="btn btn-primary" type="submit" value="adicionar" name="cmd">Adicionar</button>     <button class="btn btn-primary" type="submit" value="pesquisar" name="cmd">Pesquisar</button> 
+        <button class="btn btn-primary" type="submit" value="adicionar" name="cmd" id="btnEnviar">Adicionar</button>     <button class="btn btn-primary" type="submit" value="pesquisar" name="cmd">Pesquisar</button> 
         
+        <div class="container">
+        	<table class="table table-striped">
+        		<tbody>
+        			<% for (Cadastro c : lista) { %>
+        			<tr>
+        				<td><%=c.getData() %></td>
+        				<td><%=c.getHora() %></td>
+        				<td><%=c.getSetor() %></td>
+        				<td><%=c.getCodigo() %></td>
+        				<td><%=c.getProntuario() %></td>
+        				<td><%=c.getPaciente() %></td>
+        				<td><%=c.getConsulta() %></td>
+        				<td><%=c.getProfissional() %></td>
+        				<td><%=c.getMotivo() %></td>
+        				<td><%=c.getTelefone1() %></td>
+        				<td><%=c.getContato1() %></td>
+        				<td><%=c.getSituacao1() %></td>
+        				<td><%=c.getTelefone2() %></td>
+        				<td><%=c.getContato2() %></td>
+        				<td><%=c.getSituacao2() %></td>
+        				<td><%=c.getTelefone3() %></td>
+        				<td><%=c.getContato3() %></td>
+        				<td><%=c.getSituacao3() %></td>
+        				<td><%=c.getTelefone4() %></td>
+        				<td><%=c.getContato4() %></td>
+        				<td><%=c.getSituacao4() %></td>
+        				<td><%=c.getObser() %></td>
+        			</tr>
+        			<% } %>
+        		</tbody>
+        	</table>
+        </div>
     </form>
-
 </body>
 </html>
