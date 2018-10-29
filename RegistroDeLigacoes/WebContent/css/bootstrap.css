@@ -71,6 +71,20 @@ label {
     margin: 3em 2em 3em 10em;
 }
 
+#login {
+    margin: 18em 15em 0 15em;
+}
+
+#fMedico, #fSetor, #fUsuario {
+    margin: 7em 18em 0 18em;
+    
+}
+
+#navBar {
+   margin: 1em 0 3em 0;
+   font-size: 20px;
+}
+
 
 article,
 aside,
