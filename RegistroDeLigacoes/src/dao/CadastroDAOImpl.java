@@ -60,6 +60,7 @@ public class CadastroDAOImpl implements CadastroDAO {
 			pstmt.setString(23, c.getSituacao4());
 			pstmt.setString(24, c.getObser());
 			pstmt.executeUpdate();
+			pstmt.close();
 		} catch (SQLException e) {
 			throw new GenericDAOException(e);
 		}
