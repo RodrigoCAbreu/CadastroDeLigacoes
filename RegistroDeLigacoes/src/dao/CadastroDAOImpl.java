@@ -16,8 +16,8 @@ public class CadastroDAOImpl implements CadastroDAO {
 	
 	@Override
 	public void adicionar(Cadastro c) throws GenericDAOException {
-		String sql = "INSERT INTO cadastro (id, usuario, data, hora, setor, codigo, prontuario, paciente, consulta,"
-				+ " profissional, motivo, telefone1, contato1, situacao1, telefone2, contato2, situacao2,"
+		String sql = "INSERT INTO cadastro (id, usuario, data, hora, nome_setor, codigo, prontuario, paciente, nome_exame,"
+				+ " nome_medico, motivo, telefone1, contato1, situacao1, telefone2, contato2, situacao2,"
 				+ " telefone3, contato3, situacao3, telefone4, contato4, situacao4, obser) VALUES "
 				+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
