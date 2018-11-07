@@ -38,7 +38,7 @@ public class SetorDAOImpl implements SetorDAO {
 			while(rs.next()) {
 				Setor s = new Setor();
 				s.setId(rs.getLong("id"));
-				s.setSetor(rs.getString("setor"));
+				s.setSetor(rs.getString("nome_setor"));
 				listaS.add(s);
 			}
 		} catch (SQLException e) {

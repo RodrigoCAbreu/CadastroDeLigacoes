@@ -39,7 +39,7 @@ public class MedicoDAOImpl implements MedicoDAO {
 			while(rs.next()) {
 				Medico m = new Medico();
 				m.setId(rs.getLong("id"));
-				m.setNome(rs.getString("nome"));
+				m.setNome(rs.getString("nome_medico"));
 				lista.add(m);
 			}
 		} catch (SQLException e) {

@@ -62,20 +62,21 @@
                 <input type="text1" class="form-control" name="nomeExame" id="nomeExame">
             </div>      
             
-            <button type="submit" class="btn btn-primary" value="adicionar" name="cmdE" id="btnEnviarE">Adicionar</button>  <button class="btn btn-primary" type="submit" value="pesquisar" name="cmdE">Pesquisar</button>
-        
-        	<div class="container">
-        		<table class="table table-striped">
-        			<tbody>
-        				<% for (Exame e : listaE) { %>
-        				<tr>
-        					<td><%=e.getExame() %></td>	
-        				</tr>
-        				<% } %>
-        			</tbody>
-        		</table>
-        	</div>      
+            <button type="submit" class="btn btn-primary" value="adicionar" name="cmdE" id="btnEnviarE">Adicionar</button>  <button class="btn btn-primary" type="submit" value="pesquisar" name="cmdE">Pesquisar</button>      
       	</form>
+      	<br>
+        <br>
+      	<div class="container">
+        	<table class="table table-striped">
+        		<tbody>
+        			<% for (Exame e : listaE) { %>
+        			<tr>
+        				<td><%=e.getExame() %></td>	
+        			</tr>
+        			<% } %>
+        		</tbody>
+        	</table>
+        </div>
     </div>
     
     <div class="tab-pane container fade" id="menu1">
@@ -104,21 +105,21 @@
                 <input type="text1" class="form-control" name="nomeMedico" id="nomeMedico">
             </div>      
             
-            <button type="submit" class="btn btn-primary" value="adicionar" name="cmdM" id="btnEnviarM">Adicionar</button>  <button class="btn btn-primary" type="submit" value="pesquisar" name="cmdM">Pesquisar</button>
-        
-	        <div class="container">
-	        	<table class="table table-striped">
-	        		<tbody>
-	        			<% for (Medico m : lista) { %>
-	        			<tr>
-	        				<td><%=m.getNome() %></td>	
-	        			</tr>
-	        			<% } %>
-	        		</tbody>
-	        	</table>
-	        </div>
-        
+            <button type="submit" class="btn btn-primary" value="adicionar" name="cmdM" id="btnEnviarM">Adicionar</button>  <button class="btn btn-primary" type="submit" value="pesquisar" name="cmdM">Pesquisar</button>       
         </form>
+        <br>
+        <br>
+        <div class="container">
+	        <table class="table table-striped">
+	        	<tbody>
+	        		<% for (Medico m : lista) { %>
+	        		<tr>
+	        			<td><%=m.getNome() %></td>	
+	        		</tr>
+	        		<% } %>
+	        	</tbody>
+	        </table>
+	   	</div>
     </div>
     
     <div class="tab-pane container fade" id="menu2">

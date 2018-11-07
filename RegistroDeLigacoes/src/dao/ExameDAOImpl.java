@@ -39,7 +39,7 @@ public class ExameDAOImpl implements ExameDAO {
 			while(rs.next()) {
 				Exame e = new Exame();
 				e.setId(rs.getLong("id"));
-				e.setExame(rs.getString("nome"));
+				e.setExame(rs.getString("nome_exame"));
 				listaE.add(e);
 			}
 		} catch (SQLException e) {

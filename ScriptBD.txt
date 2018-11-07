@@ -30,7 +30,7 @@ Primary Key (ID)) ENGINE = MyISAM;
 create table funcionario (
 	Id int unsigned zerofill not null,
 	nome varchar(70) not null,
-	usuario varchar(15),
+	usuario varchar(30),
 	senha char(10),
 	Primary Key (usuario)) Engine = MyISAM;
 	
@@ -45,7 +45,7 @@ create table setor (
 	Primary Key(nome_setor)) Engine = MyISAM;
 	
 create table medico (
-	id_medico int unsigned zerofill not null,
+	id int unsigned zerofill not null,
 	nome_medico char(80),
 	Primary Key (nome_medico)) Engine = MyISAM;
 	

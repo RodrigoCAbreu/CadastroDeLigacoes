@@ -8,29 +8,29 @@ public class Cadastro implements Serializable {
 	private static final long serialVersionUID = 3763954342128886445L;
 
 	private long id;
-	private String usuario;
+	private String usuario = "";
 	private String data;
 	private String hora;
 	private String setor;
-	private String codigo;
-	private String prontuario;
-	private String paciente;
+	private String codigo = "";
+	private String prontuario = "";
+	private String paciente = "";
 	private String consulta;
 	private String profissional;
 	private String motivo;
-	private String telefone1;
-	private String contato1;
+	private String telefone1 = "";
+	private String contato1 = "";
 	private String situacao1;
-	private String telefone2;
-	private String contato2;
+	private String telefone2 = "";
+	private String contato2 = "";
 	private String situacao2;
-	private String telefone3;
-	private String contato3;
+	private String telefone3 = "";
+	private String contato3 = "";
 	private String situacao3;
-	private String telefone4;
-	private String contato4;
+	private String telefone4 = "";
+	private String contato4 = "";
 	private String situacao4;
-	private String obser;
+	private String obser = "";
 	
 	public long getId() {
 		return id;

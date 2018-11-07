@@ -26,8 +26,6 @@ public class MedicoController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-		
 		String cmd = request.getParameter("cmdM");
 		String msg = null;
 		HttpSession session = request.getSession();
