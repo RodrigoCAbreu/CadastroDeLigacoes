@@ -8,7 +8,6 @@
 	<title>Registro de Ligação</title>
 	<link rel="stylesheet" href="./css/bootstrap.css" />
 	<script src="./js/jquery-3.3.1.min.js"></script>
-	
 	<script>
 		function remover( codigo ) {
 			if (confirm("Remove o cadastro com código " + codigo)) {
@@ -19,7 +18,7 @@
 			}
 		}
 
-		function editar( id ) {
+		function editar( codigo ) {
 			$('#cadastroform').empty();
 			$('#cadastroform').append('<input type="hidden" name="codigo" value="' + codigo + '"/>');
 			$('#cadastroform').append('<input type="hidden" name="cmd" value="editar"/>');
@@ -41,11 +40,11 @@
 		   session.setAttribute("LISTA", null);
 	   }
 	   
-	   Cadastro cadastroAtual = (Cadastro)session.getAttribute("Cadastro Atual");
+	   Cadastro cadastroAtual = (Cadastro)session.getAttribute("CADASTRO_ATUAL");
 	   if (cadastroAtual == null) { 
 		   cadastroAtual = new Cadastro();
 	   } else { 
-		   session.setAttribute("Cadastro Atual", null);
+		   session.setAttribute("CADASTRO_ATUAL", null);
 	   }
 	   
 	   if (msg != null) {
@@ -208,8 +207,8 @@
         				<td><%=c.getPaciente() %></td>
         				<td>
 							<div class="form-group">
-								<button type="button" class="btn btn-primary" onclick="remover(<%=c.getCodigo()%>);">Remover</button>
-								<button type="button" class="btn btn-primary" onclick="editar(<%=c.getCodigo()%>);">Editar</button>		
+								<button type="button" class="btn btn-primary" onclick="remover('<%=c.getCodigo()%>');">Remover</button>
+								<button type="button" class="btn btn-primary" onclick="editar('<%=c.getCodigo()%>');">Editar</button>		
 							</div>																		
 						</td>
         			</tr>
