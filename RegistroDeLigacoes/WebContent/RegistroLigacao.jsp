@@ -6,8 +6,10 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Registro de Ligação</title>
-	<link rel="stylesheet" href="./css/bootstrap.css" />
+	<script src="./js/bootstrap.min.js"></script>
 	<script src="./js/jquery-3.3.1.min.js"></script>
+	<link rel="stylesheet" href="./css/bootstrap.css" />
+	
 	<script>
 		function remover( codigo ) {
 			if (confirm("Remove o cadastro com código " + codigo)) {
@@ -27,6 +29,8 @@
 	</script>	
 </head>
 <body>
+	<%@ include file="./menu.jsp" %>
+	<br><br>
 	
 	<section>
 		<h1>IPGG - Registro de ligações</h1>
@@ -52,7 +56,7 @@
 	%>
 			<h3 class="alert alert-danger"><%=msg%></h3>
 	<% } %>
-		
+	<br><br>
 
 	<form action="./CadastroController" method="post" class="form-inline" id="cadastroform">
 	  

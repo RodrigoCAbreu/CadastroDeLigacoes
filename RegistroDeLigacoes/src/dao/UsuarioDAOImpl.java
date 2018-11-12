@@ -42,7 +42,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 				Usuario u = new Usuario();
 				u.setId(rs.getLong("id"));
 				u.setNome(rs.getString("nome"));
-				u.setNomeUsuario(rs.getString("nomeUsuario"));
+				u.setNomeUsuario(rs.getString("usuario"));
 				u.setSenha(rs.getString("senha"));
 				listaU.add(u);
 			}

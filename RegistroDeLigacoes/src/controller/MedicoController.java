@@ -47,7 +47,7 @@ public class MedicoController extends HttpServlet {
 		}
 		
 		session.setAttribute("MENSAGEM", msg);
-		response.sendRedirect("./administracao.jsp");
+		response.sendRedirect("./CadastroMedico.jsp");
 		
 	}
 

@@ -45,7 +45,7 @@ public class UsuarioController extends HttpServlet {
 		}
 		
 		session.setAttribute("MENSAGEM", msgU);
-		response.sendRedirect("./administracao.jsp");
+		response.sendRedirect("./CadastroUsuario.jsp");
 	}
 
 }

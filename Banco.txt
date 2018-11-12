@@ -1,0 +1,62 @@
+use registrodeligacoes;
+
+create table cadastro (
+id int unsigned zerofill NOT NULL AUTO_INCREMENT,
+usuario varchar(40) not null,
+nome_setor varchar(40) not null,
+nome_exame varchar(40) not null,
+data varchar(15),
+hora varchar(15),
+setor varchar(40) not null,
+codigo Varchar(40) not null,
+prontuario varchar(40) not null,
+paciente varchar(40) not null,
+consulta varchar(40),
+nome_medico varchar(40),    
+motivo varchar(150) not null,
+telefone1 varchar(12)not null,
+contato1 varchar(40) not null, 
+situacao1 varchar(40) not null,
+telefone2 varchar(12),
+contato2 varchar(40) ,
+situacao2 varchar(40),
+telefone3 varchar(12),
+contato3 varchar(40),
+situacao3 varchar(40),
+telefone4 varchar(12),
+contato4 varchar(40),
+situacao4 varchar(40),
+observacoes varchar(250),
+Primary Key (ID)) ENGINE = MyISAM;
+
+create table funcionario (
+	id int unsigned zerofill not null auto_increment,
+	nome varchar(70) not null,
+	usuario varchar(20) not null,
+	senha char(20),
+	Primary Key (Id_funcionario,usuario)) Engine = MyISAM;
+	
+create table exame ( 
+	id int unsigned zerofill not null auto_increment,
+	nome_exame char(80) not null,
+	Primary Key (Id_exame,nome_exame)) Engine = MyISAM;
+	
+
+	
+	create table medico (
+		id int unsigned zerofill not null auto_increment,
+		nome_medico char(80) not null,
+		Primary Key (id_medico,nome_medico)) Engine = MyISAM;
+	
+	create table setor (
+		
+	id int unsigned zerofill not null auto_increment,
+	nome_setor char(80) not null,
+	Primary Key(Id_setor,nome_setor)) Engine = MyISAM;
+
+-- declaração das FK e ligação entre as Tabelas 
+
+ALTER TABLE cadastro ADD CONSTRAINT FK_CADASTROxFUNCIONARIO FOREIGN KEY ( usuario ) REFERENCES funcionario (usuario);
+ALTER TABLE cadastro ADD CONSTRAINT FK_CADASTROxEXAME FOREIGN KEY ( nome_exame ) REFERENCES exame (nome_exame);
+ALTER TABLE cadastro ADD CONSTRAINT FK_CADASTROxSETOR FOREIGN KEY ( nome_setor ) REFERENCES setor (nome_setor);
+ALTER TABLE cadastro ADD CONSTRAINT FK_CADASTROxMEDICO FOREIGN KEY ( nome_medico ) REFERENCES medico 

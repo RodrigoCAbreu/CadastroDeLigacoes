@@ -7,7 +7,7 @@ public class Exame implements Serializable {
 	private static final long serialVersionUID = 8213130664524762908L;
 
 	private long id;
-	private String exame;
+	private String exame = "";
 	
 	public long getId() {
 		return id;

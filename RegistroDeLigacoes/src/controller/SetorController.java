@@ -43,7 +43,7 @@ public class SetorController extends HttpServlet {
 		}
 		
 		session.setAttribute("MENSAGEM", msgS);
-		response.sendRedirect("./administracao.jsp");
+		response.sendRedirect("./CadastroSetor.jsp");
 		
 	}
 

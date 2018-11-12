@@ -6,14 +6,14 @@ import java.sql.SQLException;
 
 public class ConnectionSingleton {
 
-//	private Connection con;
-//	private static ConnectionSingleton instancy;
-//	private static final String JDBC_URL = "jdbc:mariadb://localhost:3306/registrodeligacoes";
-//	private static final String JDBC_USER = "root";
-//	private static final String JDBC_PASS = "";
-	
-	
 	private Connection con;
+	private static ConnectionSingleton instancy;
+	private static final String JDBC_URL = "jdbc:mariadb://localhost:3306/registrodeligacoes";
+	private static final String JDBC_USER = "root";
+	private static final String JDBC_PASS = "";
+	
+	
+	/*	private Connection con;
 	private static ConnectionSingleton instancy;
 	private static final String JDBC_URL = "jdbc:oracle:thin:@localhost:1521:XE";
 	private static final String JDBC_USER = "SYSTEM";
@@ -26,18 +26,18 @@ public class ConnectionSingleton {
 			} catch (SQLException | ClassNotFoundException e) {
 				throw new GenericDAOException( e );
 			}
-		}
+		} */
 	
 	
 	
-/*	private ConnectionSingleton() throws GenericDAOException {
+	private ConnectionSingleton() throws GenericDAOException {
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 			con = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASS);
 		} catch (SQLException | ClassNotFoundException e) {
 			throw new GenericDAOException( e );
 		}
-	} */
+	} 
 	
 	public static ConnectionSingleton getInstancy() {
 		if (instancy == null) {
