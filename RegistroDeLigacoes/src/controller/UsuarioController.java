@@ -38,7 +38,28 @@ public class UsuarioController extends HttpServlet {
 				List<Usuario> listaU = uDao.pesquisarUsuario(request.getParameter("nome"));
 				session.setAttribute("LISTA", listaU);
 				msgU = "Foi encontrado " + listaU.size() + " cadastro";
-			}
+			} else if ("remover".equals(cmd)) {
+				String id = request.getParameter("idUsuario");
+				uDao.remover(Long.parseLong(id));
+				msgU = "Usuário com o Id " + id + " foi removido";
+				List<Usuario> listaU = uDao.pesquisarUsuario("");
+				session.setAttribute("LISTA", listaU);				
+			} else if ("editar".equals(cmd)) {
+				String id = request.getParameter("idUsuario");
+				Usuario u = uDao.pesquisarPorId(Long.parseLong(id));
+				session.setAttribute("USUARIO_ATUAL", u);
+				msgU = "Detalhes do usuário com o Id " + id;
+			} else if ("salvar".equals(cmd)) {
+				Usuario u = new Usuario();
+				String id = request.getParameter("idUsuario");
+				u.setNome(request.getParameter("nome"));
+				u.setNomeUsuario(request.getParameter("nomeUsuario"));
+				u.setSenha(request.getParameter("password"));
+				uDao.salvar( Long.parseLong(id), u );
+				List<Usuario> listaU = uDao.pesquisarUsuario("");
+				session.setAttribute("LISTA", listaU);				
+				msgU = "Usuário foi atualizado com sucesso";
+			} 
 		} catch (GenericDAOException e) {
 			e.printStackTrace();
 			msgU = "Erro ao adicionar este cadastro";

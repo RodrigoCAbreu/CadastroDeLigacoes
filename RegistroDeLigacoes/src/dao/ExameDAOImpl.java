@@ -82,17 +82,14 @@ public class ExameDAOImpl implements ExameDAO {
 	@Override
 	public void salvar(long id, Exame e) throws GenericDAOException {
 		String sql = "UPDATE exame SET nome_exame = ? WHERE id = ?";
-		PreparedStatement pstmt;
 		try {
-			pstmt = con.prepareStatement(sql);
+			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, e.getExame());
-			pstmt.setLong(2, 0);
+			pstmt.setLong(2, id);
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (SQLException e1) {
 			throw new GenericDAOException( e1 );
 		}
-		
 	}
-
 }

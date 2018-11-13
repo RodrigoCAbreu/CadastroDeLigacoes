@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import entidade.Medico;
 
 public class MedicoDAOImpl implements MedicoDAO {
@@ -49,4 +48,50 @@ public class MedicoDAOImpl implements MedicoDAO {
 		return lista;
 	}
 
+	@Override
+	public void remover(long id) throws GenericDAOException {
+		String sql = "DELETE FROM medico WHERE id = ?";
+		try {
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setLong(1, id);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new GenericDAOException( e );
+		}
+		
+	}
+
+	@Override
+	public Medico pesquisarPorId(long id) throws GenericDAOException {
+		Medico m = new Medico();
+		String sql = "SELECT * FROM medico WHERE id = ?";
+		try {
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setLong(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) { 
+				m.setId(rs.getLong("id"));
+				m.setNome(rs.getString("nome_medico"));
+			}
+		} catch (SQLException e) {
+			throw new GenericDAOException( e );
+		}
+		return m;
+	}
+
+	@Override
+	public void salvar(long id, Medico m) throws GenericDAOException {
+		String sql = "UPDATE medico SET nome_medico = ? WHERE id = ?";
+		try {
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, m.getNome());
+			pstmt.setLong(2, id);
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			throw new GenericDAOException( e );
+		}
+	}		
 }
+
+

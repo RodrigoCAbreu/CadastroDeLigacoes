@@ -7,7 +7,7 @@ public class Setor implements Serializable {
 	private static final long serialVersionUID = 3768220525372583763L;
 
 	private long id;
-	private String setor;
+	private String setor = "";
 	
 	public long getId() {
 		return id;

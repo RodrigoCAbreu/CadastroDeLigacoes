@@ -47,4 +47,48 @@ public class SetorDAOImpl implements SetorDAO {
 		
 		return listaS;
 	}
+
+	@Override
+	public void remover(long id) throws GenericDAOException {
+		String sql = "DELETE FROM setor WHERE id = ?";
+		try {
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setLong(1, id);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new GenericDAOException( e );
+		}
+	}
+
+	@Override
+	public Setor pesquisarPorId(long id) throws GenericDAOException {
+		Setor s = new Setor();
+		String sql = "SELECT * FROM setor WHERE id = ?";
+		try {
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setLong(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) { 
+				s.setId(rs.getLong("id"));
+				s.setSetor(rs.getString("nome_setor"));
+			}
+		} catch (SQLException e) {
+			throw new GenericDAOException( e );
+		}
+		return s;
+	}
+
+	@Override
+	public void salvar(long id, Setor s) throws GenericDAOException {
+		String sql = "UPDATE setor SET nome_setor = ? WHERE id = ?";
+		try {
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, s.getSetor());
+			pstmt.setLong(2, id);
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e1) {
+			throw new GenericDAOException( e1 );
+		}
+	}	
 }

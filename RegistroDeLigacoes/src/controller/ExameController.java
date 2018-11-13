@@ -43,8 +43,8 @@ public class ExameController extends HttpServlet {
 				String id = request.getParameter("idExame");
 				eDao.remover(Long.parseLong(id));
 				msgE = "Exame com o Id " + id + " foi removido";
-				List<Exame> lista = eDao.pesquisarExame("");
-				session.setAttribute("LISTA", lista);				
+				List<Exame> listaE = eDao.pesquisarExame("");
+				session.setAttribute("LISTA", listaE);				
 			} else if ("editar".equals(cmd)) {
 				String id = request.getParameter("idExame");
 				Exame e = eDao.pesquisarPorId(Long.parseLong(id));
@@ -55,8 +55,8 @@ public class ExameController extends HttpServlet {
 				String id = request.getParameter("idExame");
 				e.setExame(request.getParameter("nomeExame"));
 				eDao.salvar( Long.parseLong(id), e );
-				List<Exame> lista = eDao.pesquisarExame("");
-				session.setAttribute("LISTA", lista);				
+				List<Exame> listaE = eDao.pesquisarExame("");
+				session.setAttribute("LISTA", listaE);				
 				msgE = "Exame foi atualizado com sucesso";
 			} 
 		} catch (GenericDAOException e) {

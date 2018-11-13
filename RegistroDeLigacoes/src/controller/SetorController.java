@@ -36,7 +36,26 @@ public class SetorController extends HttpServlet {
 				List<Setor> listaS = sDao.pesquisarSetor(request.getParameter("nomeSetor"));
 				session.setAttribute("LISTA", listaS);
 				msgS = "Foi encontrado " + listaS.size() + " cadastro";
-			}
+			} else if ("remover".equals(cmd)) {
+				String id = request.getParameter("idSetor");
+				sDao.remover(Long.parseLong(id));
+				msgS = "Setor com o Id " + id + " foi removido";
+				List<Setor> listaS = sDao.pesquisarSetor("");
+				session.setAttribute("LISTA", listaS);				
+			} else if ("editar".equals(cmd)) {
+				String id = request.getParameter("idSetor");
+				Setor s = sDao.pesquisarPorId(Long.parseLong(id));
+				session.setAttribute("SETOR_ATUAL", s);
+				msgS = "Detalhes do Setor com o Id " + id;
+			} else if ("salvar".equals(cmd)) {
+				Setor s = new Setor();
+				String id = request.getParameter("idSetor");
+				s.setSetor(request.getParameter("nomeSetor"));
+				sDao.salvar( Long.parseLong(id), s );
+				List<Setor> listaS = sDao.pesquisarSetor("");
+				session.setAttribute("LISTA", listaS);				
+				msgS = "Setor atualizado com sucesso";
+			} 
 		} catch (GenericDAOException e) {
 			e.printStackTrace();
 			msgS = "Erro ao adicionar este cadastro";

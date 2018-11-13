@@ -7,7 +7,7 @@ public class Medico implements Serializable {
 	private static final long serialVersionUID = -2008891168299065280L;
 	
 	private long id;
-	private String nome;
+	private String nome = "";
 	
 	public long getId() {
 		return id;
