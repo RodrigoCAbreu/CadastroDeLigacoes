@@ -72,12 +72,21 @@ label {
 }
 
 #login {
-    margin: 18em 15em 0 15em;
+    margin: 5em 15em 0 15em;
 }
 
 #fMedico, #fSetor, #fUsuario, #fExame {
     margin: 7em 18em 0 18em;
     
+}
+
+.icones {
+	border:#3484FF solid 3px;
+	border-radius:10px;
+	padding:1em;
+	text-align: center;
+	max-width:600px;
+	margin-left: 23%;
 }
 
 article,

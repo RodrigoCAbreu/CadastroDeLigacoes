@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="entidade.Cadastro, java.util.List, java.util.ArrayList" %>
+<%@ page import="entidade.Cadastro, entidade.Usuario, java.util.List, java.util.ArrayList" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -29,7 +29,7 @@
 	</script>	
 </head>
 <body>
-	<%@ include file="./menu.jsp" %>
+<%@ include file="./menu.jsp" %>
 	<br><br>
 	
 	<section>
@@ -81,12 +81,10 @@
         
             <label for="textfield" class="margemR">Código:</label>
             <input type="text" class="margemB" name="codigo" id="codigo" value="<%=cadastroAtual.getCodigo()%>" >
-            <input type=image src="images/pesquisar.png" name="btnCodigo" id="btnCodigo">
-        
-        
+            
             <label for="textfield" class="margemR">Prontuário:</label>
             <input type="text" class="margemB" name="prontuario" id="prontuario" value="<%=cadastroAtual.getProntuario()%>" >
-            <input type=image src="images/pesquisar.png" name="btnProntuario" id="btnProntuario">
+            
         <br>
         
         <label for="textfield" class="margemR">Paciente:</label>
@@ -224,15 +222,46 @@
     </form>
     
     <script>
-		$('#setor').val("<%=cadastroAtual.getSetor()%>");
-		$('#consulta').val("<%=cadastroAtual.getConsulta()%>");
-		$('#profissional').val("<%=cadastroAtual.getProfissional()%>");
-		$('#motivo').val("<%=cadastroAtual.getMotivo()%>");
-		$('#situacao1').val("<%=cadastroAtual.getSituacao1()%>");
-		$('#situacao2').val("<%=cadastroAtual.getSituacao2()%>");
-		$('#situacao3').val("<%=cadastroAtual.getSituacao3()%>");
-		$('#situacao4').val("<%=cadastroAtual.getSituacao4()%>");
-	</script>
-    
+    	var consulta = "<%=cadastroAtual.getConsulta()%>";
+		if (consulta != "null") {
+			$('#consulta').val( consulta );
+		}
+		
+		var setor = "<%=cadastroAtual.getSetor()%>";
+		if (setor != "null") {
+			$('#setor').val( setor );
+		}
+		
+		var profissional = "<%=cadastroAtual.getProfissional()%>";
+		if (profissional != "null") {
+			$('#profissional').val( profissional );
+		}
+		
+		var motivo = "<%=cadastroAtual.getMotivo()%>";
+		if (motivo != "null") {
+			$('#motivo').val( motivo );
+		}
+		
+		var sit1 = "<%=cadastroAtual.getSituacao1()%>";
+		if (sit1 != "null") {
+			$('#situacao1').val( sit1 );
+		}
+		
+		var sit2 = "<%=cadastroAtual.getSituacao2()%>";
+		if (sit2 != "null") {
+			$('#situacao2').val( sit2 );
+		}
+		
+		var sit3 = "<%=cadastroAtual.getSituacao3()%>";
+		if (sit3 != "null") {
+			$('#situacao3').val( sit3 );
+		}
+		
+		var sit4 = "<%=cadastroAtual.getSituacao4()%>";
+		if (sit4 != "null") {
+			$('#situacao4').val( sit4 );
+		}
+</script>
+
 </body>
 </html>
