@@ -52,26 +52,31 @@ public class CadastroController extends HttpServlet {
 				c.setContato4(request.getParameter("contato4"));
 				c.setSituacao4(request.getParameter("situacao4"));
 				c.setObser(request.getParameter("obser"));
+				c.setExterno(request.getParameter("externo"));
 				cDao.adicionar(c);
 				msg = "Cadastro adicionado com sucesso";
-			} else if ("pesquisar".equals(cmd)) {
+			} else if ("pesquisarC".equals(cmd)) {
 				List<Cadastro> lista = cDao.pesquisarPorCodigo(request.getParameter("codigo"));
 				session.setAttribute("LISTA", lista);
 				msg = "Foi encontrado " + lista.size() + " cadastro";
+			} else if ("pesquisarP".equals(cmd)) {
+				List<Cadastro> lista = cDao.pesquisarPorProntuario(request.getParameter("prontuario"));
+				session.setAttribute("LISTA", lista);
+				msg = "Foi encontrado " + lista.size() + " cadastro";
 			} else if ("remover".equals(cmd)) {
-				String codigo = request.getParameter("codigo");
-				cDao.remover(codigo);
-				msg = "Cadastro com o codigo " + codigo + " foi removido";
+				long id = Long.parseLong(request.getParameter("id"));
+				cDao.remover(id);
+				msg = "Cadastro removido com sucesso";
 				List<Cadastro> lista = cDao.pesquisarPorCodigo("");
 				session.setAttribute("LISTA", lista);
 			} else if ("editar".equals(cmd)) {
-				String codigo = request.getParameter("codigo");
-				Cadastro c = cDao.pesquisarCodigo(codigo);
+				long id = Long.parseLong(request.getParameter("id"));
+				Cadastro c = cDao.pesquisarId(id);
 				session.setAttribute("CADASTRO_ATUAL", c);
-				msg = "Detalhes do Cadastro com o código " + codigo;
+				msg = "Detalhes do Cadastro, edite as informações necessárias";
 			} else if ("salvar".equals(cmd)) {
 				Cadastro c = new Cadastro();
-				String codigo = request.getParameter("codigo");
+				long id = Long.parseLong(request.getParameter("id"));
 				c.setUsuario(request.getParameter("usuario"));
 				c.setData(request.getParameter("data"));
 				c.setHora(request.getParameter("hora"));
@@ -95,7 +100,8 @@ public class CadastroController extends HttpServlet {
 				c.setContato4(request.getParameter("contato4"));
 				c.setSituacao4(request.getParameter("situacao4"));
 				c.setObser(request.getParameter("obser"));
-				cDao.salvar(codigo, c);
+				c.setExterno(request.getParameter("externo"));
+				cDao.salvar(id, c);
 				List<Cadastro> lista = cDao.pesquisarPorCodigo("");
 				session.setAttribute("LISTA", lista);				
 				msg = "Cadastro foi atualizado com sucesso";

@@ -30,16 +30,16 @@ public class Authenticator extends HttpServlet {
 		String msg = null;
 		
 		if("Logar".equals(cmd)) {
+			Usuario usuario = new Usuario();
 			String user = request.getParameter("userName");
 			String pass = request.getParameter("password");
-			Usuario usuario = new Usuario();
 			String sql = "SELECT * FROM funcionario WHERE usuario = ? AND senha = ?";
 			try {
 				PreparedStatement pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, user);
 				pstmt.setString(2, pass);
 				ResultSet rs = pstmt.executeQuery();
-				if(rs.next()) {
+				while(rs.next()) {
 					usuario.setId(rs.getLong("id"));
 					usuario.setNome(rs.getString("nome"));
 					usuario.setNomeUsuario(rs.getString("usuario")); 
@@ -48,14 +48,11 @@ public class Authenticator extends HttpServlet {
 				
 				if (usuario.getId() > 0) {
 					session.setAttribute("LOGADO", usuario);
-					response.sendRedirect("./RegistroLigacao2.jsp");
-				} else if (usuario.getNomeUsuario() == "administrador" && usuario.getSenha() == "admin@123" ){
-					session.setAttribute("LOGADO", usuario);
-					response.sendRedirect("./Home.jsp");
+					response.sendRedirect("./RegistroLigacao.jsp");
 				} else {
 					msg = "Usuário ou senha incorretos";
-					session.setAttribute("LOGADO", null); 
-					response.sendRedirect("./login.jsp");
+					session.setAttribute("MENSAGEM", msg);
+					response.sendRedirect("./index.jsp");
 				}
 			} catch (SQLException e) {
 				response.sendRedirect("./index.jsp");

@@ -17,8 +17,8 @@ public class CadastroDAOImpl implements CadastroDAO {
 	public void adicionar(Cadastro c) throws GenericDAOException {
 		String sql = "INSERT INTO cadastro (id, usuario, data, hora, nome_setor, codigo, prontuario, paciente, nome_exame,"
 				+ " nome_medico, motivo, telefone1, contato1, situacao1, telefone2, contato2, situacao2,"
-				+ " telefone3, contato3, situacao3, telefone4, contato4, situacao4, obser) VALUES "
-				+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ " telefone3, contato3, situacao3, telefone4, contato4, situacao4, obser, externo) VALUES "
+				+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
@@ -46,6 +46,7 @@ public class CadastroDAOImpl implements CadastroDAO {
 			pstmt.setString(22, c.getContato4());
 			pstmt.setString(23, c.getSituacao4());
 			pstmt.setString(24, c.getObser());
+			pstmt.setString(25, c.getExterno());
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (SQLException e) {
@@ -86,6 +87,7 @@ public class CadastroDAOImpl implements CadastroDAO {
 				c.setContato4(rs.getString("contato4"));
 				c.setSituacao4(rs.getString("situacao4"));
 				c.setObser(rs.getString("obser"));
+				c.setExterno(rs.getString("externo"));
 				lista.add(c);			
 			}
 		} catch (SQLException e) {
@@ -93,13 +95,56 @@ public class CadastroDAOImpl implements CadastroDAO {
 		}
 		return lista;
 	}
-
+	
 	@Override
-	public void remover(String codigo) throws GenericDAOException {
-		String sql = "DELETE FROM cadastro WHERE codigo = ?";
+	public List<Cadastro> pesquisarPorProntuario(String prontuario) {
+		List<Cadastro> lista = new ArrayList<>();
+		String sql = "SELECT * FROM cadastro WHERE prontuario like ?";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, codigo);
+			pstmt.setString(1, "%" + prontuario + "%");
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Cadastro c = new Cadastro();
+				c.setId(rs.getLong("id"));
+				c.setData(rs.getString("data"));
+				c.setHora(rs.getString("hora"));
+				c.setSetor(rs.getString("nome_setor"));
+				c.setCodigo(rs.getString("codigo"));
+				c.setProntuario(rs.getString("prontuario"));
+				c.setPaciente(rs.getString("paciente"));
+				c.setConsulta(rs.getString("nome_exame"));
+				c.setProfissional(rs.getString("nome_medico"));
+				c.setMotivo(rs.getString("motivo"));
+				c.setTelefone1(rs.getString("telefone1"));
+				c.setContato1(rs.getString("contato1"));
+				c.setSituacao1(rs.getString("situacao1"));
+				c.setTelefone2(rs.getString("telefone2"));
+				c.setContato2(rs.getString("contato2"));
+				c.setSituacao2(rs.getString("situacao2"));
+				c.setTelefone3(rs.getString("telefone3"));
+				c.setContato3(rs.getString("contato3"));
+				c.setSituacao3(rs.getString("situacao3"));
+				c.setTelefone4(rs.getString("telefone4"));
+				c.setContato4(rs.getString("contato4"));
+				c.setSituacao4(rs.getString("situacao4"));
+				c.setObser(rs.getString("obser"));
+				c.setExterno(rs.getString("externo"));
+				lista.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return lista;
+	}
+
+	@Override
+	public void remover(long id) throws GenericDAOException {
+		String sql = "DELETE FROM cadastro WHERE id = ?";
+		try {
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setLong(1, id);
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (SQLException e) {
@@ -109,12 +154,12 @@ public class CadastroDAOImpl implements CadastroDAO {
 	}
 
 	@Override
-	public Cadastro pesquisarCodigo(String codigo) throws GenericDAOException {
+	public Cadastro pesquisarId(long id) throws GenericDAOException {
 		Cadastro c = new Cadastro();
-		String sql = "SELECT * FROM cadastro WHERE codigo = ?";
+		String sql = "SELECT * FROM cadastro WHERE id = ?";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, codigo);
+			pstmt.setLong(1, id);
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next()) { 
 				c.setId(rs.getLong("id"));
@@ -140,6 +185,7 @@ public class CadastroDAOImpl implements CadastroDAO {
 				c.setContato4(rs.getString("contato4"));
 				c.setSituacao4(rs.getString("situacao4"));
 				c.setObser(rs.getString("obser"));
+				c.setExterno(rs.getString("externo"));
 			}
 		} catch (SQLException e) {
 			throw new GenericDAOException( e );
@@ -148,18 +194,18 @@ public class CadastroDAOImpl implements CadastroDAO {
 	}
 
 	@Override
-	public void salvar(String codigo, Cadastro c) throws GenericDAOException {
-		String sql = "UPDATE cadastro SET id = ?, usuario = ?, data = ?, hora = ?, nome_setor = ?, prontuario = ?, "
+	public void salvar(long id, Cadastro c) throws GenericDAOException {
+		String sql = "UPDATE cadastro SET usuario = ?, data = ?, hora = ?, nome_setor = ?, codigo = ?, prontuario = ?, "
 				+ "paciente = ?, nome_exame = ?, nome_medico = ?, motivo = ?, telefone1 = ?, contato1 = ?, situacao1 = ?,"
 				+ "telefone2 = ?, contato2 = ?, situacao2 = ?, telefone3 = ?, contato3 = ?, situacao3 = ?, telefone4 = ?,"
-				+ "contato4 = ?, situacao4 = ?, obser = ? WHERE codigo = ?";
+				+ "contato4 = ?, situacao4 = ?, obser = ?, externo = ? WHERE id = ?";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
-			pstmt.setLong(1, 0);
-			pstmt.setString(2, c.getUsuario());
-			pstmt.setString(3, c.getData());
-			pstmt.setString(4, c.getHora());
-			pstmt.setString(5, c.getSetor());
+			pstmt.setString(1, c.getUsuario());
+			pstmt.setString(2, c.getData());
+			pstmt.setString(3, c.getHora());
+			pstmt.setString(4, c.getSetor());
+			pstmt.setString(5, c.getCodigo());
 			pstmt.setString(6, c.getProntuario());
 			pstmt.setString(7, c.getPaciente());
 			pstmt.setString(8, c.getConsulta());
@@ -178,12 +224,12 @@ public class CadastroDAOImpl implements CadastroDAO {
 			pstmt.setString(21, c.getContato4());
 			pstmt.setString(22, c.getSituacao4());
 			pstmt.setString(23, c.getObser());
-			pstmt.setString(24, c.getCodigo());
+			pstmt.setString(24, c.getExterno());
+			pstmt.setLong(25, id);
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (SQLException e) {
 			throw new GenericDAOException( e );
 		}
 	}
-
 }

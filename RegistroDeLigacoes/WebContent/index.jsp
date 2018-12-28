@@ -11,14 +11,15 @@
 <link rel="stylesheet" href="./css/bootstrap.css" />
 </head>
 <body>
-	<%
-	String msg = (String) session.getAttribute("MENSAGEM");
+	<% String msg = (String)session.getAttribute("MENSAGEM");
 	
-	if (msg != null) {
-		session.setAttribute("MENSAGEM", null);
+		if (msg != null) {
+			session.setAttribute("MENSAGEM", null);
 	%>
 			<h3 class="alert alert-danger"><%=msg%></h3>
 	<% } %>
+	
+	<br><br>
 
 
 	<div class="container">

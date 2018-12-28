@@ -31,16 +31,14 @@ input[type=text], select {
 
 #setor {
 	width: 16em;
+	
 }
 
-input[type=date] {
+#data, #hora {
+	width: 8em;
+	padding: 0.5em;
 	border-radius: 5px;
-	resize:vertical;
-}
-
-input[type=time] {
-	border-radius: 5px;
-	resize:vertical;
+	resize:vertical;	
 }
 
 input[type=tel] {
@@ -54,7 +52,7 @@ label {
 	display:inline-block;	
 }
 
-#consulta, #profissional, #motivo {
+#consulta, #profissional, #motivo, #externo {
 	margin-left: 10em;
 }
 
@@ -3423,7 +3421,7 @@ fieldset[disabled] .btn-link:focus {
 }
 .btn-lg,
 .btn-group-lg > .btn {
-  padding: 10px 16px;
+  padding: 7px 14px;
   font-size: 18px;
   line-height: 1.3333333;
   border-radius: 6px;

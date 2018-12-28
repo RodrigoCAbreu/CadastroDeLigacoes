@@ -31,6 +31,7 @@ public class Cadastro implements Serializable {
 	private String contato4 = "";
 	private String situacao4;
 	private String obser = "";
+	private String externo = "";
 	
 	public long getId() {
 		return id;
@@ -176,6 +177,12 @@ public class Cadastro implements Serializable {
 	public void setObser(String obser) {
 		this.obser = obser;
 	}
+	public String getExterno() {
+		return externo;
+	}
+	public void setExterno(String externo) {
+		this.externo = externo;
+	}
 
 	@Override
 	public String toString() {
@@ -228,6 +235,9 @@ public class Cadastro implements Serializable {
 		s.append(this.getSituacao4());
 		s.append("\tObservação:");
 		s.append(this.getObser());
+		s.append("\tExterno:");
+		s.append(this.getExterno());
 		return s.toString();
 	}
+	
 }

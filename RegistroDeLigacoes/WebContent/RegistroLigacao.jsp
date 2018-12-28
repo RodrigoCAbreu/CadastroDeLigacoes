@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="entidade.Cadastro, entidade.Usuario, java.util.List, java.util.ArrayList" %>
+<%@ page import="entidade.Cadastro, entidade.Usuario, java.util.List, java.util.ArrayList, java.util.Date, java.text.SimpleDateFormat" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,25 +8,27 @@
 	<title>Registro de Ligação</title>
 	<script src="./js/bootstrap.min.js"></script>
 	<script src="./js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery.mask.min.js"/></script>
 	<link rel="stylesheet" href="./css/bootstrap.css" />
 	
 	<script>
-		function remover( codigo ) {
-			if (confirm("Remove o cadastro com código " + codigo)) {
+		function remover( id ) {
+			if (confirm("Remove o cadastro com id " + id)) {
 				$('#cadastroform').empty();
-				$('#cadastroform').append('<input type="hidden" name="codigo" value="' + codigo + '"/>');
+				$('#cadastroform').append('<input type="hidden" name="id" value="' + id + '"/>');
 				$('#cadastroform').append('<input type="hidden" name="cmd" value="remover"/>');
 				$('#cadastroform').submit();
 			}
 		}
 
-		function editar( codigo ) {
+		function editar( id ) {
 			$('#cadastroform').empty();
-			$('#cadastroform').append('<input type="hidden" name="codigo" value="' + codigo + '"/>');
+			$('#cadastroform').append('<input type="hidden" name="id" value="' + id + '"/>');
 			$('#cadastroform').append('<input type="hidden" name="cmd" value="editar"/>');
 			$('#cadastroform').submit();
 		}
-	</script>	
+	</script>
+	
 </head>
 <body>
 <%@ include file="./menu.jsp" %>
@@ -36,7 +38,16 @@
 		<h1>IPGG - Registro de ligações</h1>
 	</section>
 	
-	<%  String msg = (String)session.getAttribute("MENSAGEM");
+	<%  Date dia = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	
+		Date hora = new Date();
+		SimpleDateFormat sdfh = new SimpleDateFormat("HH:mm");
+	
+		String msg = (String)session.getAttribute("MENSAGEM");
+	
+		Usuario user = (Usuario)session.getAttribute("LOGADO");
+	
 	   List<Cadastro> lista = (List<Cadastro>)session.getAttribute("LISTA");
 	   if (lista == null){
 		   lista = new ArrayList<Cadastro>();
@@ -59,15 +70,17 @@
 	<br><br>
 
 	<form action="./CadastroController" method="post" class="form-inline" id="cadastroform">
-	  
+	  	
+	  	<input type type="text" name="id" id="id" value="<%=cadastroAtual.getId()%>" hidden> 
+	  	
 		<label for="textfield" class="margemR">Usuário:</label>
-		<input type="text" class="margemB" name="usuario" id="usuario" value="<%=cadastroAtual.getUsuario()%>">
+		<input type="text" class="margemB" name="usuario" id="usuario" value="<%= user.getNome()%>" readonly>
         
         <label for="textfield" class="margemR">Data:</label>
-		<input type="date" class="margemB" name="data" id="data" value="<%=cadastroAtual.getData()%>" >
+		<input class="margemB" name="data" id="data" value="<%= sdf.format(dia) %>" readonly>
         
         <label for="time" class="margemR">Hora:</label>
-      	<input type="time" class="margemB" name="hora" id="hora" value="<%=cadastroAtual.getHora()%>" >
+      	<input class="margemB" name="hora" id="hora" value="<%= sdfh.format(hora)%>" readonly>
                 
         <label for="select" class="margemR">Setor:</label>
   		<select name="setor" class="margemB" name="setor" id="setor">
@@ -79,11 +92,18 @@
         
         <br><br><br>
         
+        	
             <label for="textfield" class="margemR">Código:</label>
             <input type="text" class="margemB" name="codigo" id="codigo" value="<%=cadastroAtual.getCodigo()%>" >
+            <button type="submit" class="btn btn-primary btn-lg" name="cmd" value="pesquisarC">
+            	<span class="glyphicon glyphicon-search"></span>
+            </button>
             
             <label for="textfield" class="margemR">Prontuário:</label>
             <input type="text" class="margemB" name="prontuario" id="prontuario" value="<%=cadastroAtual.getProntuario()%>" >
+            <button type="submit" class="btn btn-primary btn-lg" name="cmd" value="pesquisarP">
+            	<span class="glyphicon glyphicon-search"></span>
+            </button>
             
         <br>
         
@@ -93,18 +113,19 @@
         <br>
         
   		<select class="selectMenu" name="consulta" id="consulta">
-  			<option selected>Seleciona a consulta ou exame</option>
-            <option>Geriatria</option>
-            <option></option>
+  			<option selected>Selecione a consulta ou exame</option>
+            <option >Geriatria</option>
         </select>
+        
+		<input type="text" name="externo" id="externo" value="<%=cadastroAtual.getExterno()%>" placeholder="Especificar consulta ou exame externo">
+        
+        <br>
         
         <select class="selectMenu" name="profissional" id="profissional">
   			<option selected>Selecione o nome do profissional</option>
             <option>Dr. Drauzio varella</option>
             <option></option>
         </select>
-        
-        <br>
         
         <select class="selectMenu" name="motivo" id="motivo">
   			<option selected>Selecione o motivo da ligação</option>
@@ -114,8 +135,9 @@
         
         <br>
         
-        <label for="tel" class="margemR">Telefone:</label>
-  		<input type="tel" class="margemB" name="telefone1" id="telefone1" value="<%=cadastroAtual.getTelefone1()%>" >
+        <label for="telefone1" class="margemR">Telefone:</label>
+  		<input type="tel" class="margemB" name="telefone1" id="telefone1" value="<%=cadastroAtual.getTelefone1()%>" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" placeholder="(00) 0000-0000">
+        <script type="text/javascript">$("#telefone1").mask("(00) 0000-00009");</script>
         
         <label for="textfield" class="margemR">Contato:</label>
 		<input type="text" class="margemB" name="contato1" id="contato1" value="<%=cadastroAtual.getContato1()%>">
@@ -129,7 +151,8 @@
         <br>
         
         <label for="tel" class="margemR">Telefone:</label>
-  		<input type="tel" class="margemB" name="telefone2" id="telefone2" value="<%=cadastroAtual.getTelefone2()%>">
+  		<input type="tel" class="margemB" name="telefone2" id="telefone2" value="<%=cadastroAtual.getTelefone2()%>" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" placeholder="(00) 0000-0000">
+        <script type="text/javascript">$("#telefone1").mask("(00) 0000-00009");</script>
         
         <label for="textfield" class="margemR">Contato:</label>
 		<input type="text" class="margemB" name="contato2" id="contato2" value="<%=cadastroAtual.getContato1()%>">
@@ -143,7 +166,8 @@
         <br>
         
         <label for="tel" class="margemR">Telefone:</label>
-  		<input type="tel" class="margemB" name="telefone3" id="telefone3" value="<%=cadastroAtual.getTelefone3()%>">
+  		<input type="tel" class="margemB" name="telefone3" id="telefone3" value="<%=cadastroAtual.getTelefone3()%>" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" placeholder="(00) 0000-0000">
+        <script type="text/javascript">$("#telefone1").mask("(00) 0000-00009");</script>
         
         <label for="textfield" class="margemR">Contato:</label>
 		<input type="text" class="margemB" name="contato3" id="contato3" value="<%=cadastroAtual.getContato3()%>">
@@ -157,7 +181,8 @@
         <br>
         
         <label for="tel" class="margemR">Telefone:</label>
-  		<input type="tel" class="margemB" name="telefone4" id="telefone4" value="<%=cadastroAtual.getTelefone4()%>">
+  		<input type="tel" class="margemB" name="telefone4" id="telefone4" value="<%=cadastroAtual.getTelefone4()%>" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" placeholder="(00) 0000-0000">
+        <script type="text/javascript">$("#telefone1").mask("(00) 0000-00009");</script>
         
         <label for="textfield" class="margemR">Contato:</label>
 		<input type="text" class="margemB" name="contato4" id="contato4" value="<%=cadastroAtual.getContato4()%>">
@@ -181,7 +206,6 @@
 				<%} else { %>
 					<button type="submit" class="btn btn-primary" name="cmd" value="salvar">Salvar</button>
 				<%} %>
-				<button type="submit" class="btn btn-primary" name="cmd" value="pesquisar">Pesquisar</button>
 		</div>	
         
         <%if (lista.size() > 0) {%>
@@ -189,6 +213,7 @@
         	<table class="table table-striped">
         		<thead>
 					<tr>
+						<th>Id</th>
 						<th>Data</th>
 						<th>Hora</th>
 						<th>Setor</th>
@@ -201,6 +226,7 @@
         		<tbody>
         			<% for (Cadastro c : lista) { %>
         			<tr>
+        				<td><%=c.getId() %></td>
         				<td><%=c.getData() %></td>
         				<td><%=c.getHora() %></td>
         				<td><%=c.getSetor() %></td>
@@ -209,8 +235,8 @@
         				<td><%=c.getPaciente() %></td>
         				<td>
 							<div class="form-group">
-								<button type="button" class="btn btn-primary" onclick="remover('<%=c.getCodigo()%>');">Remover</button>
-								<button type="button" class="btn btn-primary" onclick="editar('<%=c.getCodigo()%>');">Editar</button>		
+								<button type="button" class="btn btn-primary" onclick="remover('<%=c.getId()%>');">Remover</button>
+								<button type="button" class="btn btn-primary" onclick="editar('<%=c.getId()%>');">Editar</button>								
 							</div>																		
 						</td>
         			</tr>
