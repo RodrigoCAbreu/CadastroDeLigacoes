@@ -152,7 +152,7 @@
         
         <label for="tel" class="margemR">Telefone:</label>
   		<input type="tel" class="margemB" name="telefone2" id="telefone2" value="<%=cadastroAtual.getTelefone2()%>" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" placeholder="(00) 0000-0000">
-        <script type="text/javascript">$("#telefone1").mask("(00) 0000-00009");</script>
+        <script type="text/javascript">$("#telefone2").mask("(00) 0000-00009");</script>
         
         <label for="textfield" class="margemR">Contato:</label>
 		<input type="text" class="margemB" name="contato2" id="contato2" value="<%=cadastroAtual.getContato1()%>">
@@ -167,7 +167,7 @@
         
         <label for="tel" class="margemR">Telefone:</label>
   		<input type="tel" class="margemB" name="telefone3" id="telefone3" value="<%=cadastroAtual.getTelefone3()%>" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" placeholder="(00) 0000-0000">
-        <script type="text/javascript">$("#telefone1").mask("(00) 0000-00009");</script>
+        <script type="text/javascript">$("#telefone3").mask("(00) 0000-00009");</script>
         
         <label for="textfield" class="margemR">Contato:</label>
 		<input type="text" class="margemB" name="contato3" id="contato3" value="<%=cadastroAtual.getContato3()%>">
@@ -182,7 +182,7 @@
         
         <label for="tel" class="margemR">Telefone:</label>
   		<input type="tel" class="margemB" name="telefone4" id="telefone4" value="<%=cadastroAtual.getTelefone4()%>" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" placeholder="(00) 0000-0000">
-        <script type="text/javascript">$("#telefone1").mask("(00) 0000-00009");</script>
+        <script type="text/javascript">$("#telefone4").mask("(00) 0000-00009");</script>
         
         <label for="textfield" class="margemR">Contato:</label>
 		<input type="text" class="margemB" name="contato4" id="contato4" value="<%=cadastroAtual.getContato4()%>">
